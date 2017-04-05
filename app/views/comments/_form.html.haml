@@ -1,0 +1,7 @@
+.form-group
+  = f.text_area :body, class: "form-control"
+- if !f.object.new_record? && can?(:verify, f.object)
+  .form-group
+    = f.select :state, Comment.states.map {|k,v| [k,k]}
+.form-group
+  = f.submit

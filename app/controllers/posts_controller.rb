@@ -1,10 +1,14 @@
 class PostsController < ApplicationController
 
   before_action :require_user, only: [:new, :create]
-  before_action :fetch_post, only: [:show, :edit, :destroy, :update]
+  before_action :fetch_post, only: [:edit, :destroy, :update]
 
   def index
-    @posts = Post.published.page(params[:page]).per 5
+    if params[:user_id].present?
+      @posts = Post.published.ordered.by_user(params[:user_id]).page(params[:page]).per 5
+    else
+      @posts = Post.published.ordered.page(params[:page]).per 5
+    end
   end
 
   def new
@@ -21,17 +25,22 @@ class PostsController < ApplicationController
   end
 
   def show
+    @post = Post.includes(:comments).find params[:id]
+    @comments = @post.comments.ordered
   end
 
   def destroy
+    authorize! :destroy, @post
     @post.destroy
     redirect_to root_path, notice: "successfully destroyed"
   end
 
   def edit
+    authorize! :edit, @post
   end
 
   def update
+    authorize! :edit, @post
     if @post.save
       redirect_to post_path(@post), notice: "Post successfully edited"
     else

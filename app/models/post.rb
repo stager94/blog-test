@@ -12,4 +12,6 @@ class Post < ApplicationRecord
   validates :cover, presence: true
 
   scope :published, ->{ where is_published: true }
+  scope :ordered, ->{ order created_at: :desc }
+  scope :by_user, ->(user_id){ where user_id: user_id }
 end

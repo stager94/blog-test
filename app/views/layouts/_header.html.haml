@@ -3,10 +3,11 @@
     %nav.blog-nav
       = link_to "Home", root_path, class: "blog-nav-item"
       - if user_signed_in?
-        = link_to "My Posts", root_path, class: "blog-nav-item"
+        = link_to "My Posts", user_posts_path(current_user), class: "blog-nav-item"
       .pull-right
         - if user_signed_in?
           = link_to "+ Add New Post", new_post_path, class: "blog-nav-item"
+          = link_to "Change Password", edit_user_path(current_user), class: "blog-nav-item"
           = link_to "Log Out", log_out_path, method: :delete, class: "blog-nav-item"
         - else
           = link_to "Sign Up", sign_up_path, class: "blog-nav-item"

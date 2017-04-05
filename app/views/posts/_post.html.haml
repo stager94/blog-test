@@ -4,6 +4,10 @@
 = simple_format post.body
 
 %small
-  = link_to "Edit", edit_post_path(post)
-  |
-  = link_to "Remove", post_path(post), method: :delete
+  = link_to "Show", post_path(post)
+  - if can? :edit, post
+    |
+    = link_to "Edit", edit_post_path(post)
+  - if can? :delete, post
+    |
+    = link_to "Remove", post_path(post), method: :delete

@@ -62,3 +62,4 @@ gem 'haml'
 gem 'bcrypt-ruby', '3.1.2'
 
 gem 'pry'
+gem 'cancancan'

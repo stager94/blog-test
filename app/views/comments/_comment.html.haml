@@ -1,0 +1,15 @@
+- if can? :show, comment
+  %div(data-comment-id="#{comment.id}" class="#{'locked' if comment.locked?} #{'created' if comment.created?}")
+    %b= comment.user.try(:email)
+    = "at #{comment.created_at}"
+    = simple_format comment.body
+
+    %small
+      - if can? :edit, comment
+        |
+        = link_to "Edit", edit_post_comment_path(comment.post, comment), remote: true
+      - if can? :delete, comment
+        |
+        = link_to "Remove", post_comment_path(comment.post, comment), method: :delete
+
+    %hr

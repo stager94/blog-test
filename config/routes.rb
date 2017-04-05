@@ -6,7 +6,9 @@ Rails.application.routes.draw do
 
   root 'posts#index'
 
-  resources :users
+  resources :users do
+    resources :posts, only: [:index]
+  end
   resources :sessions
   resources :posts do
     resources :comments
