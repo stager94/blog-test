@@ -1,13 +1,16 @@
-%h2.blog-post-title= link_to post.title, post
-%p.blog-post-meta= "#{post.created_at.strftime('%d.%m.%Y %H:%M')} by #{post.user.email}"
-= image_tag post.cover(:medium), class: "img-responsive", width: "100%"
-= simple_format post.body
+.post-content
+  %h2.blog-post-title= link_to post.title, post
+  %p.blog-post-meta= "#{post.created_at.strftime('%d.%m.%Y %H:%M')} by #{post.user.email}"
+  %p
+    %small= "Tags: #{post.tags_list}"
+  = image_tag post.cover(:medium), class: "img-responsive", width: "100%"
+  = simple_format post.body
 
-%small
-  = link_to "Show", post_path(post)
-  - if can? :edit, post
-    |
-    = link_to "Edit", edit_post_path(post)
-  - if can? :delete, post
-    |
-    = link_to "Remove", post_path(post), method: :delete
+  %small
+    = link_to "Show", post_path(post)
+    - if can? :edit, post
+      |
+      = link_to "Edit", edit_post_path(post)
+    - if can? :delete, post
+      |
+      = link_to "Remove", post_path(post), method: :delete

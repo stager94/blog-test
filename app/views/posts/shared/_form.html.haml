@@ -11,6 +11,10 @@
 .form-group
   = f.check_box :is_published
   = f.label :is_published
+.form-group
+  = f.label :tags_list
+  = f.text_field :tags_list, class: "form-control"
+
 - unless f.object.new_record?
   .form-group
     = f.label :created_at

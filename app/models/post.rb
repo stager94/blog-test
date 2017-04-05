@@ -1,4 +1,7 @@
 class Post < ApplicationRecord
+
+  include Posts::Taggable
+
   belongs_to :user
   has_many :comments
 

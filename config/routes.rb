@@ -12,5 +12,6 @@ Rails.application.routes.draw do
   resources :sessions
   resources :posts do
     resources :comments
+    get :by_tag, on: :collection
   end
 end

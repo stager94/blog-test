@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
   def index
     if params[:user_id].present?
-      @posts = Post.published.ordered.by_user(params[:user_id]).page(params[:page]).per 5
+      @posts = Post.ordered.by_user(params[:user_id]).page(params[:page]).per 5
     else
       @posts = Post.published.ordered.page(params[:page]).per 5
     end
@@ -41,11 +41,17 @@ class PostsController < ApplicationController
 
   def update
     authorize! :edit, @post
-    if @post.save
+    if @post.update post_params
       redirect_to post_path(@post), notice: "Post successfully edited"
     else
       render :new
     end
+  end
+
+  def by_tag
+    tag = Tag.find_by_name params[:tag]
+    @posts = tag.posts.published.ordered.page(params[:page]).per 5
+    render :index
   end
 
   private
