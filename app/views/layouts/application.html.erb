@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Blog</title>
+
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +13,22 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'layouts/header' %>
+    <div class="container">
+      <%= render 'layouts/head' %>
+      <div class="row">
+        <div class="col-sm-8 blog-main">
+          <% flash.each do |name, msg| %>
+            <%= content_tag :div, msg, id: "flash#{name}" %>
+          <% end %>
+
+          <%= yield %>
+        </div>
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          <%= render 'layouts/sidebar' %>
+        </div>
+      </div>
+    </div>
+    <%= render 'layouts/footer' %>
   </body>
 </html>

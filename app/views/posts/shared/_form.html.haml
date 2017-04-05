@@ -1,0 +1,15 @@
+= render_errors_for @post
+.form-group
+  = f.label :title
+  = f.text_field :title, class: "form-control"
+.form-group
+  = f.label :cover
+  = f.file_field :cover
+.form-group
+  = f.label :body
+  = f.text_area :body, class: "form-control", rows: 10
+.form-group
+  = f.check_box :is_published
+  = f.label :is_published
+.form-group
+  = f.submit "Add a New Post", class: "btn btn-primary btn-lg"

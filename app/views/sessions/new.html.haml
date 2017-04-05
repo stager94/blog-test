@@ -1,0 +1,11 @@
+%h1 Log In
+
+= form_tag sessions_path do |f|
+  .form-group
+    = label_tag :email
+    = email_field_tag :email, nil, class: "form-control"
+  .form-group
+    = label_tag :password
+    = password_field :password, nil, class: "form-control"
+  .form-group
+    = submit_tag "Log In", class: "btn btn-primary btn-lg"

@@ -1,0 +1,13 @@
+.blog-masthead
+  .container
+    %nav.blog-nav
+      = link_to "Home", root_path, class: "blog-nav-item"
+      - if user_signed_in?
+        = link_to "My Posts", root_path, class: "blog-nav-item"
+      .pull-right
+        - if user_signed_in?
+          = link_to "+ Add New Post", new_post_path, class: "blog-nav-item"
+          = link_to "Log Out", log_out_path, method: :delete, class: "blog-nav-item"
+        - else
+          = link_to "Sign Up", sign_up_path, class: "blog-nav-item"
+          = link_to "Log In", log_in_path, class: "blog-nav-item"

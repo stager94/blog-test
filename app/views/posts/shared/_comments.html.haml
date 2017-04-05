@@ -1,0 +1,8 @@
+%h3 Post a New Comments
+= form_for @post.comments.new, url: post_comments_path(@post) do |f|
+  .form-group
+    = f.text_area :body, class: "form-control"
+  .form-group
+    = f.submit
+
+%h3 All Comments
