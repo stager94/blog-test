@@ -38,6 +38,9 @@ gem 'jbuilder', '~> 2.5'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  # RSpec for Rails-3+
+  gem 'rspec-rails'
+
 end
 
 group :development do
@@ -63,3 +66,18 @@ gem 'bcrypt-ruby', '3.1.2'
 
 gem 'pry'
 gem 'cancancan'
+
+group :test do
+  # Collection of testing matchers extracted from Shoulda
+  gem 'shoulda-matchers', '~> 3.1'
+
+  gem 'minitest'
+
+  # A library for setting up Ruby objects as test data.
+  gem 'factory_girl_rails'
+
+  # Strategies for cleaning databases in Ruby. Can be used to ensure a clean state for testing.
+  gem 'database_cleaner'
+  gem 'faker'
+  gem 'rails-controller-testing'
+end

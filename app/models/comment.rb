@@ -8,5 +8,8 @@ class Comment < ApplicationRecord
   validates :body, presence: true
 
   scope :ordered, ->{ order created_at: :desc }
+  scope :for_user, -> { where state: :verified }
+  scope :for_admin, -> { all }
+  scope :for_moderator, -> { all }
 
 end

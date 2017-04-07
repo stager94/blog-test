@@ -5,17 +5,19 @@ class PostsController < ApplicationController
 
   def index
     if params[:user_id].present?
-      @posts = Post.ordered.by_user(params[:user_id]).page(params[:page]).per 5
+      @posts = Post.by_user(params[:user_id]).page(params[:page]).per 5
     else
       @posts = Post.published.ordered.page(params[:page]).per 5
     end
   end
 
   def new
+    authorize! :create, Post
     @post = current_user.posts.new
   end
 
   def create
+    authorize! :create, Post
     @post = current_user.posts.new post_params
     if @post.save
       redirect_to root_path, notice: "A new post successfully created"
@@ -26,7 +28,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.includes(:comments).find params[:id]
-    @comments = @post.comments.ordered
+    @comments = @post.comments.ordered.send("for_#{current_user.try(:role) || 'user'}")
   end
 
   def destroy

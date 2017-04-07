@@ -16,5 +16,5 @@ class Post < ApplicationRecord
 
   scope :published, ->{ where is_published: true }
   scope :ordered, ->{ order created_at: :desc }
-  scope :by_user, ->(user_id){ where user_id: user_id }
+  scope :by_user, ->(user_id){ ordered.where user_id: user_id }
 end

@@ -8,6 +8,7 @@ class Ability
     can :manage, User, id: user.id
     can :manage, Post, user_id: user.id
     can :create, Comment
+    can :create, Post
     can [:edit, :delete], Comment do |c|
       c.user_id == user.id && c.created_at > (Time.now - 15.minutes)
     end
